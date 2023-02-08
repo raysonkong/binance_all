@@ -4,7 +4,7 @@ import pprint
 import datetime
 import time
 import os
-from config_binance_all import *
+from config import *
 from binance.client import Client
 client = Client(API_KEY, SECRET_KEY)
 
