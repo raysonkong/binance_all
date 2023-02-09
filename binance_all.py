@@ -58,6 +58,7 @@ binance_info = client.get_all_tickers()
 
 symbols = []
 
+## ====== Select the wanted Symbols ======== ### 
 for info in binance_info:
     for wantedCurrency in WANTED_CURRENCIES:
         wantedCurrencyLen = len(wantedCurrency)
@@ -81,13 +82,11 @@ def removeUnwanted(symbols):
 
 removeUnwanted(symbols)
 
-
 #print(len(noDerivativeSymbols))
 
-
-## ===================================================##
+## =========================================================##
 ##  ========   Helper Function: Append "Binance:" to pairs ======== ####
-## =====================================================##
+## =========================================================##
 
 finalSymbols = []
 
@@ -136,7 +135,7 @@ grouped_pairs = group_into_n(finalSymbols, n)
 # /Users/raysonkong/code/python/webscrapping/scripts_v2/cmc_api_to_tradingview/outputs
 def output_to_text_file(nested_grouped_pairs):
     for idx, group in enumerate(nested_grouped_pairs):
-            filename=f"{os.getcwd()}/Binance_All_{generation_date}_/-1.0 {idx+1}.BINANCE_All_{generation_date}.txt"
+            filename=f"{os.getcwd()}/BINANCE_All_{generation_date}/-1.0 p.{idx+1}.BINANCE_All_{generation_date}.txt"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             with open(filename, "w") as f:
                 for pair in group:
