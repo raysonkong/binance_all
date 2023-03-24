@@ -50,11 +50,11 @@ generation_date = generation_date.strftime("%d_%m_%Y")
 
 #info = client.get_symbol_info('BNBBTC')
 binance_info = client.get_all_tickers()
+#binance_info2 = client.get_ticker()
 
 # response
 # [ {'symbol': 'ETHBTC', 'price': '0.07002700'}, .... ] 
 
-#print(binance_info[0])
 
 symbols = []
 
@@ -96,6 +96,8 @@ def appendExchange(symbols):
 
 appendExchange(noDerivativeSymbols)
 
+
+
 #print(finalSymbols)
 
 #================================
@@ -113,7 +115,7 @@ def group_into_n(data_list, n):
 #test = [1,2,3,4,5,6,7,8]
 #print(group_into_n(test, n))
 
-grouped_pairs = group_into_n(finalSymbols, n)
+grouped_pairs = group_into_n(list(set(finalSymbols)), n)
 
 #print(grouped_pairs)
 
@@ -135,7 +137,7 @@ grouped_pairs = group_into_n(finalSymbols, n)
 # /Users/raysonkong/code/python/webscrapping/scripts_v2/cmc_api_to_tradingview/outputs
 def output_to_text_file(nested_grouped_pairs):
     for idx, group in enumerate(nested_grouped_pairs):
-            filename=f"{os.getcwd()}/BINANCE_All_{generation_date}/-1.0 p.{idx+1}.BINANCE_All_{generation_date}.txt"
+            filename=f"{os.getcwd()}/BINANCE_All_{WANTED_CURRENCIES[0]}_{generation_date}/-1.0 p.{idx+1}.BINANCE_All_{WANTED_CURRENCIES[0]}_{generation_date}_total_{len(list(set(finalSymbols)))}.txt"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             with open(filename, "w") as f:
                 for pair in group:
@@ -145,11 +147,10 @@ def output_to_text_file(nested_grouped_pairs):
 
 
 def run_srapper():
-    os.system('clear')
     output_to_text_file(grouped_pairs)
 
 
-    print("== Binance Scrapping Completed ==")
+    print("== Binance All Tickers Retrieved ==")
     print('\n')
     #print("======================================================")
 if __name__ =='__main__':

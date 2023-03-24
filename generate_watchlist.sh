@@ -1,3 +1,3 @@
 #!/bin/bash/
 
-python3 binance_all.py
+pipenv run python3 binance_all.py
